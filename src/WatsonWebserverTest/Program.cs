@@ -6,12 +6,17 @@ namespace WatsonWebserverTest
 {
     class Program
     {
-        static Server _Server = null;
+        static string _Hostname = "localhost";
+        static int _Port = 8000;
+        static bool _Ssl = false;
 
+        static Server _Server = null;
+        
         static void Main(string[] args)
         {
-            _Server = new Server("127.0.0.1", 8000, true, DefaultRoute);
+            _Server = new Server(_Hostname, _Port, _Ssl, DefaultRoute);
             _Server.Routes.PreRouting = PreRoutingHandler;
+            _Server.Settings.IO.EnableKeepAlive = false;
             _Server.Start();
 
             Console.Write("Server started on:");
@@ -34,6 +39,11 @@ namespace WatsonWebserverTest
         static async Task DefaultRoute(HttpContext ctx)
         {
             ctx.Response.ContentType = "text/html";
+
+            await Task.Delay(10000);
+
+            Console.WriteLine("Done");
+
             await ctx.Response.Send(ResponseBody);
         }
 
