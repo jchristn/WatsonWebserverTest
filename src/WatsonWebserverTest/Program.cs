@@ -13,7 +13,7 @@ namespace WatsonWebserverTest
     {
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 
-        static bool _UsingLite = false;
+        static bool _UsingLite = true;
         static string _Hostname = "localhost";
         static int _Port = 8080;
         static bool _Ssl = false;
@@ -44,19 +44,19 @@ namespace WatsonWebserverTest
                         Console.WriteLine("| Responding from pre-authentication static route /preauth/static");
                         await ctx.Response.Send();
                         return;
-                    }, false)
+                    }, null, false)
                     .MapParameteRoute(HttpMethod.GET, "/preauth/parameter/{id}", async (HttpContextBase ctx) =>
                     {
                         Console.WriteLine("| Responding from pre-authentication parameter route /preauth/parameter/" + ctx.Request.Url.Parameters["id"]);
                         await ctx.Response.Send();
                         return;
-                    }, false)
+                    }, null, false)
                     .MapDynamicRoute(HttpMethod.GET, new Regex("^/preauth/dynamic/\\d+$"), async (HttpContextBase ctx) =>
                     {
                         Console.WriteLine("| Responding from pre-authentication dynamic route /preauth/dynamic");
                         await ctx.Response.Send();
                         return;
-                    }, false)
+                    }, null, false)
                     .MapAuthenticationRoute(AuthenticationRoute)
                     .MapContentRoute("/postauth/content", false, true)
                     .MapStaticRoute(HttpMethod.GET, "/postauth/static", async (HttpContextBase ctx) =>
@@ -64,19 +64,19 @@ namespace WatsonWebserverTest
                         Console.WriteLine("| Responding from post-authentication static route /postauth/static");
                         await ctx.Response.Send();
                         return;
-                    }, false)
+                    }, null, false)
                     .MapParameteRoute(HttpMethod.GET, "/postauth/parameter/{id}", async (HttpContextBase ctx) =>
                     {
                         Console.WriteLine("| Responding from post-authentication parameter route /postauth/parameter/" + ctx.Request.Url.Parameters["id"]);
                         await ctx.Response.Send();
                         return;
-                    }, false)
+                    }, null, false)
                     .MapDynamicRoute(HttpMethod.GET, new Regex("^/postauth/dynamic/\\d+$"), async (HttpContextBase ctx) =>
                     {
                         Console.WriteLine("| Responding from post-authentication dynamic route /postauth/dynamic");
                         await ctx.Response.Send();
                         return;
-                    }, false)
+                    }, null, false)
                     .MapPostRoutingRoute(PostRoutingHandler)
                     .Build();
             }
@@ -91,19 +91,19 @@ namespace WatsonWebserverTest
                         Console.WriteLine("| Responding from pre-authentication static route /preauth/static");
                         await ctx.Response.Send();
                         return;
-                    }, false)
+                    }, null, false)
                     .MapParameteRoute(HttpMethod.GET, "/preauth/parameter/{id}", async (HttpContextBase ctx) =>
                     {
                         Console.WriteLine("| Responding from pre-authentication parameter route /preauth/parameter/" + ctx.Request.Url.Parameters["id"]);
                         await ctx.Response.Send();
                         return;
-                    }, false)
+                    }, null, false)
                     .MapDynamicRoute(HttpMethod.GET, new Regex("^/preauth/dynamic/\\d+$"), async (HttpContextBase ctx) =>
                     {
                         Console.WriteLine("| Responding from pre-authentication dynamic route /preauth/dynamic");
                         await ctx.Response.Send();
                         return;
-                    }, false)
+                    }, null, false)
                     .MapAuthenticationRoute(AuthenticationRoute)
                     .MapContentRoute("/postauth/content", false, true)
                     .MapStaticRoute(HttpMethod.GET, "/postauth/static", async (HttpContextBase ctx) =>
@@ -111,19 +111,19 @@ namespace WatsonWebserverTest
                         Console.WriteLine("| Responding from post-authentication static route /postauth/static");
                         await ctx.Response.Send();
                         return;
-                    }, true)
+                    }, null, true)
                     .MapParameteRoute(HttpMethod.GET, "/postauth/parameter/{id}", async (HttpContextBase ctx) =>
                     {
                         Console.WriteLine("| Responding from post-authentication parameter route /postauth/parameter/" + ctx.Request.Url.Parameters["id"]);
                         await ctx.Response.Send();
                         return;
-                    }, true)
+                    }, null, true)
                     .MapDynamicRoute(HttpMethod.GET, new Regex("^/postauth/dynamic/\\d+$"), async (HttpContextBase ctx) =>
                     {
                         Console.WriteLine("| Responding from post-authentication dynamic route /postauth/dynamic");
                         await ctx.Response.Send();
                         return;
-                    }, true)
+                    }, null, true)
                     .MapPostRoutingRoute(PostRoutingHandler)
                     .Build();
             }

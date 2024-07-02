@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net462;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net462;net48;net6.0;net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RestWrapper" Version="3.0.14" />
-    <PackageReference Include="Watson" Version="6.0.2" />
-    <PackageReference Include="Watson.Lite" Version="6.0.2" />
+    <PackageReference Include="RestWrapper" Version="3.0.20" />
+    <PackageReference Include="Watson" Version="6.2.0" />
+    <PackageReference Include="Watson.Lite" Version="6.2.0" />
   </ItemGroup>
 
   <ItemGroup>
